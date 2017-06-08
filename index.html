@@ -10,6 +10,7 @@
     <div id="map"></div>
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACQWal5X3xXQ4KnP1cTdQoLr9_X_xs0L8&callback=initMap" async defer></script>
     <script>
       var config = {
         apiKey: "AIzaSyB7-R1BllALuiQwjF16iLiJKbs5cbp0sEY",
@@ -19,38 +20,34 @@
         storageBucket: "restaurantguide-1496516112108.appspot.com",
         messagingSenderId: "453514325961"
       };
+
       firebase.initializeApp(config);
-    </script>
-    <script>
-      var map;
+      var database = firebase.database();
+      
+      var map
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 43.653, lng: -79.383},
           zoom: 13
         });
-        setMarkers(map);
-      }
-      function setMarkers(map){
-          var restaurants = [
-            ['Maker Pizza', 43.6504, -79.3981],
-            ['Junked Food Co', 43.6481, -79.3987],
-            ['Scaddabush', 43.6590, -79.3829],
-            ['Starving Artist', 43.654791, -79.421907],
-            ['Amsterdam Brewhouse', 43.6379, -79.3847],
-            ['Fring\'s', 43.645030, -79.396066],
-            ['MomuFoku', 43.6494, -79.3864]
-          ];
-
-          for(var i = 0; i < restaurants.length; i++){
-            var restaurant = restaurants[i]
-            var marker = new google.maps.Marker({
-              position: {lat: restaurant[1], lng: restaurant[2]},
-              map: map,
-              title: restaurant[0]
-          })
+        var label, latitude, longtitude, myLatLng, value;
+        for(var i = 0; i < 7; i++){
+          firebase.database().ref("restaurants/"+i).on("value", function(snapshot) {
+            value = snapshot.val();
+            label = value.name;
+            latitude = value.lat;
+            longtitude = value.lng;
+            myLatLng = {lat: latitude, lng: longtitude}; 
+	            var marker = new google.maps.Marker({
+	            position: myLatLng,
+	            map: map,
+	            name: label
+	          });
+          },function (error) {
+            console.log("Error: " + error.code);
+          });
         }
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACQWal5X3xXQ4KnP1cTdQoLr9_X_xs0L8&callback=initMap" async defer></script>
   </body>
 </html>

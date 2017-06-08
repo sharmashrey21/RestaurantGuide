@@ -1,0 +1,11 @@
+{
+	"restaurants":[
+		{"name":"Maker Pizza", "lat": 43.6504, "lng": -79.3981},
+		{"name":"Junked Food Co", "lat": 43.6481, "lng": -79.3987},
+		{"name":"Scaddabush", "lat": 43.6590, "lng": -79.3829},
+		{"name":"Starving Artist", "lat": 43.654791, "lng": -79.421907},
+		{"name":"Amsterdam Brewhouse", "lat": 43.6379, "lng":  -79.3847},
+		{"name":"Fring's", "lat": 43.645030,"lng":  -79.396066},
+		{"name":"MomuFoku", "lat": 43.6494, "lng": -79.3864}
+	]
+}
