@@ -1,9 +1,18 @@
 #map {
     height: 100%;
-}
-     
+    position: relative;
+}     
 html, body {
 	height: 100%;
     margin: 0;
     padding: 0;
+}
+#input { 
+	padding: 3px;
+	position: absolute; 
+	height: 21px;
+	width: 300px;
+	top: 10px;
+	left: 120px; 
+	z-index: 99; 
 }
